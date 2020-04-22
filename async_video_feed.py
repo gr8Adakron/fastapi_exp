@@ -57,7 +57,6 @@ def form_individual_batches(messenger_dict):
     except:
         print(f" \t - Error encountered for the following input: {batch_input}.")
             
-
 def parallelize_calls(workers_msg_list,async_workers_count):
     with Pool(processes = async_workers_count) as pool:
         pool.map(form_individual_batches, workers_msg_list)
@@ -103,22 +102,24 @@ def colonel_batch(input_dir,output_dir,batch_size,async_workers_count):
 def write_detected_video(output_video_path,op_holder_path):
     img_array = []
     frames_list = os.listdir(op_holder_path)
+    
+    sample_frame_path = op_holder_path+"/"+frames_list[0]
+    print(sample_frame_path)
+    sample_frame = cv2.imread(sample_frame_path)
+    height, width, layers = sample_frame.shape
+    size = (width,height)
+    
+    out = cv2.VideoWriter(f"{output_video_path}",cv2.VideoWriter_fourcc(*'DIVX'), 30, size)
+    
     for frame_index in range(1,len(frames_list)+1):
         filename = f"{op_holder_path}/{frame_index}.jpeg"
-        print(filename)
+        print(f" \t - Frame Added {filename}")
         try:
-            image = cv2.imread(filename)
-            height, width, layers = image.shape
-            size = (width,height)
-            img_array.append(image)
+            frame = cv2.imread(filename)
+            out.write(frame)
         except:
             print(f"\t - Frame appending error: {frame_index}")
             continue
-
-    out = cv2.VideoWriter(f"{output_video_path}",cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
-
-    for i in range(len(img_array)):
-        out.write(img_array[i])
     out.release()
 
 def main(input_video_path,output_video_path,batch_size,async_workers_count):
