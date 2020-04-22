@@ -34,7 +34,7 @@ sudo docker pull tensorflow/serving:latest-gpu
 ## API Initiation Commands:
 
 * You need to open 2-terminals inorder to make it work.
-* **Terminal #1:** For starting FastAPI server for acception request.
+* **Terminal #1:** For starting FastAPI server for accepting request.
 * **Terminal #2:** For starting TF-Serving docker image in order to load the models efficiently.
 
 #### Terminal #1 Commands (FAST API SERVER):

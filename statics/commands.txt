@@ -21,4 +21,4 @@ sudo docker container stop $(sudo docker container ls -aq)
 
 #..> for local
 
-CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/api/,target=/models/my_model   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/api/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
+CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
