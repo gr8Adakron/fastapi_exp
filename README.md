@@ -15,7 +15,7 @@ Deployment perform using two different channels: **Tensorflow Serving and Old Sc
 cd $HOME
 git clone git@github.com:gr8Adakron/fastapi_exp.git
 cd $HOME/fastapi_exp
-pip install -r fastapi.env
+pip install -r statics/fastapi.env
 
 #..> Installing TF objection package
 git clone --depth 1 https://github.com/tensorflow/models
