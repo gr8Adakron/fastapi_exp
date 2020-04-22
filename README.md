@@ -1,4 +1,4 @@
-# Human object detection model deployment using FASTApi:
+# Human detection model deployment using FastAPI:
 
 
 Deployment perform using two different channels: **Tensorflow Serving and Old School Direct Inference**
@@ -76,11 +76,11 @@ python base_video_feed.py
 ####  Tweaking Variables As Per The Requirements:
 
 1. Model can be called using TF-Serving Inference or Old School Inferencing:
-    * TF-Serving Inference is Default in main.py as its efficient.
+    * TF-Serving Inference is Default in [main.py](main.py) as its efficient.
     * In order to call using Inferencing script, uncomment falling lines
 
 ```
-#..> Uncomment Line number 18 in main.py
+#..> Uncomment Line number 18 in main.py.
 18) inf_obj  = InferenceHumanIdentifier()
 
 #..> Comment Line number 47 in main.py
@@ -94,7 +94,7 @@ python base_video_feed.py
 
 ```
 
-2. Tweaking Async call and Batch size in video feeding scripts (async_video_feed.py)
+2. Tweaking Async call and Batch size in video feeding scripts [async_video_feed.py](async_video_feed.py)
 
 ```
 #..> Line number 147 and 148
