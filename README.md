@@ -19,7 +19,7 @@ pip install -r fastapi.env
 
 #..> Installing TF objection package
 git clone --depth 1 https://github.com/tensorflow/models
-cd HOME/fastapi_expmodels/research
+cd $HOME/fastapi_exp/models/research
 pip install .
 
 #..> TF-Serving Docker Installation.
@@ -39,12 +39,14 @@ sudo docker pull tensorflow/serving:latest-gpu
 
 #### Terminal #1 Commands (FAST API SERVER):
 ```
+cd $HOME/fastapi_exp
 CORES="$(nproc --all)" && uvicorn main:app --workers ${CORES} --host 0.0.0.0 --port 8000
 
 ```
 
 #### Terminal #2 Commands (TF Serving SERVER):
 ```
+cd $HOME/fastapi_exp
 CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
 
 ```
