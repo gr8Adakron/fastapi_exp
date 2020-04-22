@@ -1,4 +1,4 @@
-# Human detection model deployment using FASTApi:
+# Human detection model deployment using FastAPI:
 
 
 Deployment perform using two different channels: **Tensorflow Serving and Old School Direct Inference**
