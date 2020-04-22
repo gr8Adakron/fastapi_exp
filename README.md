@@ -50,6 +50,7 @@ cd $HOME/fastapi_exp
 CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
 
 ```
+Inorder to stop the docker use following command `sudo docker container stop $(sudo docker container ls -aq)`
 
 **Note:** Both the commands considers the parallelism based on the number of cores available in the Systems. You can alter it as per the needs.
 
@@ -73,7 +74,7 @@ python  base_video_feed.py
 python base_video_feed.py
 
 ```
-####  Tweaking Variables As Per The Requirements:
+##  Tweaking Variables As Per The Requirements:
 
 1. Model can be called using TF-Serving Inference or Old School Inferencing:
     * TF-Serving Inference is Default in [main.py](main.py) as its efficient.
