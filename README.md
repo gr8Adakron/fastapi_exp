@@ -1,4 +1,4 @@
-# Human object detection model deployment using FASTApi:
+# Human detection model deployment using FASTApi:
 
 
 Deployment perform using two different channels: **Tensorflow Serving and Old School Direct Inference**
