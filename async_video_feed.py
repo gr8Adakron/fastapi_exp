@@ -10,6 +10,7 @@ from multiprocessing import Pool
 from subprocess import PIPE, Popen
 
 import cv2
+import glob
 import imutils
 import numpy as np
 import requests
@@ -110,7 +111,6 @@ def write_detected_video(output_video_path,op_holder_path):
 	out.release()
 
 def main(input_video_path,output_video_path,batch_size,async_workers_count):
-
 	frame_id   = 0
 	video_path = 'sample_video/car_stopping_shorter_version.mp4'
 	fvs		= FileVideoStream(input_video_path).start()
@@ -139,11 +139,12 @@ def main(input_video_path,output_video_path,batch_size,async_workers_count):
 	cv2.destroyAllWindows()
 	fvs.stop()
 	colonel_batch(in_holder_path,op_holder_path,batch_size,async_workers_count)
+	#op_holder_path = "/home/gr8-adakron/Adakron_bay/work/FastAPI/fastapi_exp/video_processing/outputs/bCe7mEE/"
 	write_detected_video(output_video_path,op_holder_path)
 
 if __name__ == '__main__':
 	input_video_path    = 'sample_video/car_stopping_shorter_version.mp4'
 	output_video_path   = 'output.avi'
 	batch_size          = 1
-	async_workers_count = 2
+	async_workers_count = 3
 	main(input_video_path,output_video_path,batch_size,async_workers_count)

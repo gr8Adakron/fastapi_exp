@@ -44,8 +44,8 @@ async def ObjectDetectionPost(*, body: Inputs):
 			content=jsonable_encoder({"message": "Inputs Batch must have atleast single valid request, valid image: JPEG or PNG (< 5MB).", "error_ids":error_input}),
 		)
 	try:
-		# model_output	        = serv_obj.main("human_detection",model_input)
-		model_output            = inf_obj.main(model_input)
+		model_output	        = serv_obj.main("human_detection",model_input)
+		# model_output            = inf_obj.main(model_input)
 		return_output           = post_processing(model_output)
 	except:
 		return JSONResponse(
