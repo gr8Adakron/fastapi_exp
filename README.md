@@ -1,3 +1,77 @@
-# Human object detection model deployment using FASTApi
+# Human object detection model deployment using FASTApi:
+
+
+Deployment perform using two different channels: **Tensorflow Serving and Old School Direct Inference**
+
+## Installations:
+
+**Mandatory:** Python3.6 </br>
+**Two Assumptions:**  
+* Already created an seprate python environment for this repo.
+* Cloning this repo in your Systems $HOME folder as for the further coming commands.
+
+```
+#..> Base Installation
+cd $HOME
+git clone git@github.com:gr8Adakron/fastapi_exp.git
+cd $HOME/fastapi_exp
+pip install -r fastapi.env
+
+#..> Installing TF objection package
+git clone --depth 1 https://github.com/tensorflow/models
+cd HOME/fastapi_expmodels/research
+pip install .
+
+#..> TF-Serving Docker Installation.
+#..> CPU Version.
+sudo docker pull tensorflow/serving
+
+#..> Incase for GPU Version 
+sudo docker pull tensorflow/serving:latest-gpu
+
+```
+
+## API Initiation Commands:
+
+* You need to open 2-terminals inorder to make it work.
+* **Terminal #1:** For starting FastAPI server for acception request.
+* **Terminal #2:** For starting TF-Serving docker image in order to load the models efficiently.
+
+#### Terminal #1 Commands (FAST API SERVER):
+```
+CORES="$(nproc --all)" && uvicorn main:app --workers ${CORES} --host 0.0.0.0 --port 8000
+
+```
+
+#### Terminal #2 Commands (TF Serving SERVER):
+```
+CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
+
+```
+
+**Note:** Both the commands considers the parallelism based on the number of cores available in the Systems. You can alter it as per the needs.
+
+
+## Video Feeding To The API:
+* Sample video of 30 sec present in the repo.
+* Here we got two possible ways (scripts):
+  1) By streaming frame by frame sequentially- which is little slow based on the system been hosted **i.e: base_video_feed.py**
+  2) By Feeding Concurrently along with batching.
+    **i.e: base_video_feed.py**
+
+####  Scripts calling commands (Terminal #3):
+```
+#..> Assuming you will same environment for the feeding too.
+
+
+#..> For streaming:
+python  base_video_feed.py
+
+#..> For Async:
+python base_video_feed.py
+
+
+
+```
 
 
