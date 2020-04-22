@@ -103,4 +103,35 @@ async_workers_count = 2
 
 ```
 
+#### API I/O Details:
+
+**POST URL:** http://127.0.0.1:8000/request
+
+**INPUT JSON:**
+```
+{
+    "input":[
+        {
+            "image": "base64_string",
+            "id": String
+        }
+    ]
+}
+
+```
+
+**OUTPUT JSON:**
+```
+{
+    "output":[
+        {
+            "annotated_image":"base64_string",
+            "id": String
+        }
+    ]
+    "errors": dict
+}
+
+```
+
 
