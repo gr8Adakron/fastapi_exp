@@ -51,8 +51,12 @@ def form_individual_batches(messenger_dict):
             "id": _id,
             "image": base64_image
         })
-    ann_batch_output  = distant_model(api_input)
-    saving_batch_ann(output_dir,ann_batch_output)
+    try:
+        ann_batch_output  = distant_model(api_input)
+        saving_batch_ann(output_dir,ann_batch_output)
+    except:
+        print(f" \t - Error encountered for the following input: {batch_input}.")
+            
 
 def parallelize_calls(workers_msg_list,async_workers_count):
     with Pool(processes = async_workers_count) as pool:
@@ -97,18 +101,25 @@ def colonel_batch(input_dir,output_dir,batch_size,async_workers_count):
     print(f"\t - TimeTaken for {total_image} frames {timetaken} sec")
 
 def write_detected_video(output_video_path,op_holder_path):
-	img_array = []
-	for filename in sorted(glob.glob(f'{op_holder_path}/*.jpeg')):
-	    image = cv2.imread(filename)
-	    height, width, layers = image.shape
-	    size = (width,height)
-	    img_array.append(image)
+    img_array = []
+    frames_list = os.listdir(op_holder_path)
+    for frame_index in range(1,len(frames_list)+1):
+        filename = f"{op_holder_path}/{frame_index}.jpeg"
+        print(filename)
+        try:
+            image = cv2.imread(filename)
+            height, width, layers = image.shape
+            size = (width,height)
+            img_array.append(image)
+        except:
+            print(f"\t - Frame appending error: {frame_index}")
+            continue
 
-	out = cv2.VideoWriter(f"{output_video_path}",cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
-	 
-	for i in range(len(img_array)):
-	    out.write(img_array[i])
-	out.release()
+    out = cv2.VideoWriter(f"{output_video_path}",cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
+
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
 
 def main(input_video_path,output_video_path,batch_size,async_workers_count):
 	frame_id   = 0
