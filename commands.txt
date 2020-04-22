@@ -1,0 +1,24 @@
+#..> Docker Downloading command for CPU
+
+sudo docker pull tensorflow/serving
+
+#..> Fast API start command
+
+CORES="$(nproc --all)" && uvicorn main:app --workers ${CORES} --host 0.0.0.0 --port 8000
+
+#..> command 1 multi model level parallelism
+
+CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_intra_op_parallelism=${CORES} --tensorflow_inter_op_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
+
+#..> command 2 request level parallelism
+
+CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/fastapi_exp/,target=/models/my_model   --mount type=bind,source=/home/$USER/fastapi_exp/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
+
+
+#..> to Stop docker
+
+sudo docker container stop $(sudo docker container ls -aq)
+
+#..> for local
+
+CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/api/,target=/models/my_model   --mount type=bind,source=/home/$USER/Adakron_bay/work/FastAPI/api/models.config,target=/models/models.config   -t tensorflow/serving --model_config_file=/models/models.config --tensorflow_session_parallelism=${CORES} --enable_batching=true --enable_model_warmup=true 
