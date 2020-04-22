@@ -103,7 +103,7 @@ async_workers_count = 2
 
 ```
 
-#### API I/O Details:
+## API I/O Details:
 
 **POST URL:** http://127.0.0.1:8000/request
 
