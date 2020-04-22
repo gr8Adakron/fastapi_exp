@@ -57,9 +57,9 @@ CORES="$(nproc --all)" && sudo docker run -p 8001:8500 -p 8002:8501   --mount ty
 ## Video Feeding To The API:
 * Sample video of 30 sec present in the repo.
 * Here we got two possible ways (scripts):
-  1) By streaming frame by frame sequentially- which is little slow based on the system been hosted **i.e: base_video_feed.py**
+  1) By streaming frame by frame sequentially- which is little slow based on the system been hosted **i.e: [base_video_feed.py](base_video_feed.py)**
   2) By Feeding Concurrently along with batching.
-    **i.e: async_video_feed.py**
+    **i.e: [async_video_feed.py](async_video_feed.py)**
 
 ####  Scripts calling commands (Terminal #3):
 ```
