@@ -71,7 +71,7 @@ Inorder to stop the docker use following command `sudo docker container stop $(s
 python  base_video_feed.py
 
 #..> For Async:
-python async_video_feed.py
+python base_video_feed.py
 
 ```
 ##  Tweaking Variables As Per The Requirements:
@@ -136,3 +136,68 @@ async_workers_count = 2
 ```
 
 
+## Concurrency Benchmarking
+
+##### 1.) System Configuration:  12 CPU, 32 GB RAM
+
+* Batch processing comparison between both architerctures on mentioned system conf.
+* Batch size of **16 images / per batch**.
+* **RAM Consumption:**
+    * **TF Serving:** 14 GB / 32 GB
+    * **Inferencing:** 22 GB / 32 GB 
+
+
+
+
+| Concurrency Req  | Total Images <br> (concurrent req * batch size)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
+| -------------    |:-------------:| -----:       | -----:       |
+| 1                | 16 | 5.8 sec      |8.75 sec      |
+|  5               | 80      |  21.09 sec   |  30.6 sec   |
+| 10               | 160      |    44.89 sec | 52.55 sec |
+| 20               | 320      |    $5 sec   | 93.03 sec   |
+
+* Stream processing comparison on mentioned system conf.
+    * Streaming:  **1 image  / per req**
+
+  
+| Concurrency Req  | Total Images <br> (concurrent req * 1)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
+| -------------    |:-------------:| -----:       | -----:       |
+| 1                | 16            |    0.45 sec   | 0.39 sec      |
+|  20              | 80            |    6.01 sec |  14 sec   |
+| 40               | 160           |    12.00 sec | 20.25 sec |
+| 40               | 320           |    23.81 sec    | 30 sec   |
+| 160              | 320           |    52.29 sec    | 65.05 sec   |
+
+____________________
+
+##### 2.) System Configuration:  32 CPU, 64 GB RAM
+
+* Batch processing comparison between both architerctures on mentioned system conf.
+* Batch size of **16 images / per batch**.
+* **RAM Consumption:**
+    * **TF Serving:** 14 GB / 64 GB
+    * **Inferencing:** 49 GB / 64 GB 
+
+
+
+
+| Concurrency Req  | Total Images <br> (concurrent req * batch size)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
+| -------------    |:-------------:| -----:       | -----:       |
+| 1                | 16            | 4.43 sec      | 3.25 sec      |
+|  5               | 80            |  14.72 sec   |  12.73 sec   |
+| 10               | 160           |    23.62 sec | 30.85 sec |
+| 20               | 320           |    35.48 sec   | 41.74 sec   |
+
+* Stream processing comparison on mentioned system conf.
+    * Streaming:  **1 image  / per req**
+
+  
+| Concurrency Req  | Total Images <br> (concurrent req * 1)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
+| -------------    |:-------------:| -----:       | -----:       |
+| 1                | 16            |    0.31 sec   | 0.25 sec      |
+|  20              | 80            |    5.75 sec |  10.54 sec   |
+| 40               | 160           |    8.17 sec | 14.78 sec |
+| 40               | 320           |    13.27 sec    | 19.75 sec   |
+| 160              | 320           |    53.00 sec    | 29.21 sec   |
+
+_______________________
