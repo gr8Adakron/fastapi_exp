@@ -201,3 +201,5 @@ ____________________
 | 160              | 160           |    53.00 sec    | 29.21 sec   |
 
 _______________________
+
+**Note:** The above benchmarking is considered using average and best cases of latency. 
