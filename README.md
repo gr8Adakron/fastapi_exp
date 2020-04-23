@@ -138,7 +138,7 @@ async_workers_count = 2
 
 ## Concurrency Benchmarking
 
-##### 1.) System Configuration:  12 CPU, 32 GB RAM
+### 1.) System Configuration:  12 CPU, 32 GB RAM
 
 * Batch processing comparison between both architerctures on mentioned system conf.
 * Batch size of **16 images / per batch**.
@@ -170,7 +170,7 @@ async_workers_count = 2
 
 ____________________
 
-##### 2.) System Configuration:  32 CPU, 64 GB RAM
+### 2.) System Configuration:  32 CPU, 64 GB RAM
 
 * Batch processing comparison between both architerctures on mentioned system conf.
 * Batch size of **16 images / per batch**.
