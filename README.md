@@ -162,11 +162,11 @@ async_workers_count = 2
   
 | Concurrency Req  | Total Images <br> (concurrent req * 1)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
 | -------------    |:-------------:| -----:       | -----:       |
-| 1                | 16            |    0.45 sec   | 0.39 sec      |
-|  20              | 80            |    6.01 sec |  14 sec   |
-| 40               | 160           |    12.00 sec | 20.25 sec |
-| 40               | 320           |    23.81 sec    | 30 sec   |
-| 160              | 320           |    52.29 sec    | 65.05 sec   |
+| 1                | 1            |    0.45 sec   | 0.39 sec      |
+|  20              | 20            |    6.01 sec |  14 sec   |
+| 40               | 40           |    12.00 sec | 20.25 sec |
+|   80           | 80           |    23.81 sec    | 30 sec   |
+| 160              | 160           |    52.29 sec    | 65.05 sec   |
 
 ____________________
 
@@ -194,10 +194,10 @@ ____________________
   
 | Concurrency Req  | Total Images <br> (concurrent req * 1)           | Total Time <br>(TF-Serving)  | Total Time <br>(Inferencing)  | 
 | -------------    |:-------------:| -----:       | -----:       |
-| 1                | 16            |    0.31 sec   | 0.25 sec      |
-|  20              | 80            |    5.75 sec |  10.54 sec   |
-| 40               | 160           |    8.17 sec | 14.78 sec |
-| 40               | 320           |    13.27 sec    | 19.75 sec   |
-| 160              | 320           |    53.00 sec    | 29.21 sec   |
+| 1                | 1            |    0.31 sec   | 0.25 sec      |
+|  20              | 20            |    5.75 sec |  10.54 sec   |
+| 40               | 40           |    8.17 sec | 14.78 sec |
+| 80               | 80           |    13.27 sec    | 19.75 sec   |
+| 160              | 160           |    53.00 sec    | 29.21 sec   |
 
 _______________________
