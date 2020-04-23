@@ -71,7 +71,7 @@ Inorder to stop the docker use following command `sudo docker container stop $(s
 python  base_video_feed.py
 
 #..> For Async:
-python base_video_feed.py
+python async_video_feed.py
 
 ```
 ##  Tweaking Variables As Per The Requirements:
