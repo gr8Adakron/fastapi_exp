@@ -154,7 +154,7 @@ async_workers_count = 2
 | 1                | 16 | 5.8 sec      |8.75 sec      |
 |  5               | 80      |  21.09 sec   |  30.6 sec   |
 | 10               | 160      |    44.89 sec | 52.55 sec |
-| 20               | 320      |    $5 sec   | 93.03 sec   |
+| 20               | 320      |    75 sec   | 93.03 sec   |
 
 * Stream processing comparison on mentioned system conf.
     * Streaming:  **1 image  / per req**
